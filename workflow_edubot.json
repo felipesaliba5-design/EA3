@@ -81,37 +81,17 @@
     },
     {
       "parameters": {
-        "resource": "file",
-        "operation": "get",
-        "owner": {
-          "__rl": true,
-          "value": "felipesaliba5-design",
-          "mode": "name"
-        },
-        "repository": {
-          "__rl": true,
-          "value": "Constru-o-da-Base-Documental-do-Agente-de-IA",
-          "mode": "name"
-        },
-        "filePath": "json Agente de IA",
-        "asBinaryProperty": false,
-        "additionalParameters": {}
+        "url": "https://raw.githubusercontent.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/main/json%20Agente%20de%20IA",
+        "options": {}
       },
-      "type": "n8n-nodes-base.github",
-      "typeVersion": 1.1,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
         -180,
         -140
       ],
       "id": "d6bc515b-52d7-4a92-9e13-e71f8ae348cd",
-      "name": "GitHub",
-      "webhookId": "6222982e-4224-450d-8fc6-6890118b61b5",
-      "credentials": {
-        "githubApi": {
-          "id": "58iHrK5gmLHxzgnK",
-          "name": "GitHub account 17"
-        }
-      }
+      "name": "Baixar JSON de Artigos (Sem Senha)"
     },
     {
       "parameters": {
@@ -156,7 +136,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Converte base64 do GitHub para UTF-8 e mapeia lista de documentos\nconst raw = Buffer.from($input.first().json.content, 'base64').toString('utf-8');\nconst data = JSON.parse(raw);\n\nreturn data.map((a, i) => ({\n  json: {\n    id: i + 1,\n    titulo: a.titulo,\n    autor: a.autor,\n    ano: a.ano,\n    link_pdf: a.url_pdf\n  }\n}));"
+        "jsCode": "// Recebe a lista de artigos direto do HTTP Request (sem depender de credenciais do GitHub)\nlet data = $input.all().map(i => i.json);\nif (Array.isArray(data[0])) data = data[0];\n\nreturn data.map((a, i) => ({\n  json: {\n    id: i + 1,\n    titulo: a.titulo,\n    autor: a.autor,\n    ano: a.ano,\n    link_pdf: a.url_pdf\n  }\n}));"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -398,7 +378,7 @@
         ]
       ]
     },
-    "GitHub": {
+    "Baixar JSON de Artigos (Sem Senha)": {
       "main": [
         [
           {
@@ -479,7 +459,7 @@
       "main": [
         [
           {
-            "node": "GitHub",
+            "node": "Baixar JSON de Artigos (Sem Senha)",
             "type": "main",
             "index": 0
           }
