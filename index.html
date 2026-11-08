@@ -112,6 +112,7 @@
       padding: 0.5rem 0.75rem;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
     }
 
     .webhook-bar label {
@@ -124,11 +125,33 @@
 
     .webhook-bar input {
       flex: 1;
+      min-width: 280px;
       background: transparent;
       border: none;
       color: #fff;
       font-size: 0.85rem;
       outline: none;
+    }
+
+    .quick-urls {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .btn-chip {
+      background: rgba(99, 102, 241, 0.15);
+      color: #c7d2fe;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-chip:hover {
+      background: #6366f1;
+      color: #fff;
     }
 
     /* Área de Mensagens */
@@ -295,6 +318,11 @@
       <div class="webhook-bar" id="webhookBar">
         <label for="webhookUrl">Webhook URL:</label>
         <input type="text" id="webhookUrl" value="https://n8n.incluc0de.com.br/webhook/chat" placeholder="https://n8n.incluc0de.com.br/webhook/chat">
+        <div class="quick-urls">
+          <button type="button" class="btn-chip" onclick="setWebhook('https://n8n.incluc0de.com.br/webhook/chat')">Cloud Prod</button>
+          <button type="button" class="btn-chip" onclick="setWebhook('https://n8n.incluc0de.com.br/webhook-test/chat')">Cloud Test</button>
+          <button type="button" class="btn-chip" onclick="setWebhook('http://localhost:5678/webhook/chat')">Local</button>
+        </div>
       </div>
     </header>
 
@@ -324,10 +352,14 @@
     let sessionId = localStorage.getItem('edubot_session_id') || 'sessao_' + Math.random().toString(36).substring(2, 9);
     localStorage.setItem('edubot_session_id', sessionId);
 
-    // Recupera URL do webhook salva ou usa padrão
+    // Recupera URL do webhook salva ou usa padrão da sua instância
     const webhookInput = document.getElementById('webhookUrl');
     const savedUrl = localStorage.getItem('edubot_webhook_url');
-    if (savedUrl) webhookInput.value = savedUrl;
+    if (savedUrl) {
+      webhookInput.value = savedUrl;
+    } else {
+      webhookInput.value = 'https://n8n.incluc0de.com.br/webhook/chat';
+    }
 
     const messagesArea = document.getElementById('messagesArea');
     const chatForm = document.getElementById('chatForm');
@@ -337,6 +369,11 @@
     const btnNewSession = document.getElementById('btnNewSession');
     const btnToggleUrl = document.getElementById('btnToggleUrl');
     const webhookBar = document.getElementById('webhookBar');
+
+    window.setWebhook = function(url) {
+      webhookInput.value = url;
+      localStorage.setItem('edubot_webhook_url', url);
+    };
 
     btnToggleUrl.addEventListener('click', () => {
       webhookBar.style.display = webhookBar.style.display === 'none' ? 'flex' : 'none';
@@ -436,4 +473,3 @@
   </script>
 </body>
 </html>
-

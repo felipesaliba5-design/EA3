@@ -91,7 +91,7 @@
         -140
       ],
       "id": "d6bc515b-52d7-4a92-9e13-e71f8ae348cd",
-      "name": "Baixar JSON de Artigos (Sem Senha)"
+      "name": "HTTP Request - Baixar JSON Base"
     },
     {
       "parameters": {
@@ -136,7 +136,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Recebe a lista de artigos direto do HTTP Request (sem depender de credenciais do GitHub)\nlet data = $input.all().map(i => i.json);\nif (Array.isArray(data[0])) data = data[0];\n\nreturn data.map((a, i) => ({\n  json: {\n    id: i + 1,\n    titulo: a.titulo,\n    autor: a.autor,\n    ano: a.ano,\n    link_pdf: a.url_pdf\n  }\n}));"
+        "jsCode": "// Mapeia os documentos recebidos para a esteira de download dos PDFs\nlet data = $input.all().map(i => i.json);\nif (Array.isArray(data[0])) data = data[0];\n\n// Se veio encapsulado em string ou base64\nif (data[0] && data[0].content) {\n  const raw = Buffer.from(data[0].content, 'base64').toString('utf-8');\n  data = JSON.parse(raw);\n}\n\nreturn data.map((a, i) => ({\n  json: {\n    id: i + 1,\n    titulo: a.titulo,\n    autor: a.autor,\n    ano: a.ano,\n    link_pdf: a.url_pdf\n  }\n}));"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -249,7 +249,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "/chat",
+        "path": "chat",
         "responseMode": "responseNode",
         "options": {
           "responseHeaders": {
@@ -378,7 +378,7 @@
         ]
       ]
     },
-    "Baixar JSON de Artigos (Sem Senha)": {
+    "HTTP Request - Baixar JSON Base": {
       "main": [
         [
           {
@@ -459,7 +459,7 @@
       "main": [
         [
           {
-            "node": "Baixar JSON de Artigos (Sem Senha)",
+            "node": "HTTP Request - Baixar JSON Base",
             "type": "main",
             "index": 0
           }
