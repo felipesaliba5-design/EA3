@@ -1,0 +1,83 @@
+================================================================================
+RELATÓRIO OFICIAL DE ENTREGA - PROJETO FINAL: AGENTE DE IA CONSOLIDADO
+Consolidação e Evolução do Agente de IA com RAG, Webhooks e Aplicações Consumidoras
+Plataforma Educacional DevAcademy | Assistente Virtual EduBot
+================================================================================
+
+1. IDENTIFICAÇÃO DO PROJETO
+--------------------------------------------------------------------------------
+Título do Projeto: Solução Integrada de Agente de IA com RAG, Webhooks e Aplicações Consumidoras
+Identificação da Atividade: Projeto Final / Consolidação e Evolução das Etapas Anteriores (EA1, EA2, EA3)
+Nome do Agente: EduBot (Solução Consolidada)
+Autor / Aluno: Felipe Saliba
+Conta / Perfil GitHub: felipesaliba5-design
+E-mail de Contato: felipesaliba5@gmail.com
+Contexto de Aplicação: DevAcademy (Bootcamps de Tecnologia: Front-End React e Back-End Node.js)
+Ambiente de Orquestração: n8n Workflow Automation Platform (v1+)
+Tecnologias Integradas:
+  • Motor de Agentes e Orquestração: n8n, LangChain Agent v2, Buffer Memory Window
+  • Modelos de IA (OpenAI): gpt-4o-mini (Raciocínio/Chat) e text-embedding-3-small (Embeddings)
+  • Banco de Dados Vetorial: Supabase (PostgreSQL 15+ com extensão pgvector e índice HNSW)
+  • Protocolo de Comunicação: HTTP REST via Webhook do n8n com suporte total a CORS
+  • Aplicação Consumidora: Interface Web Interativa (HTML5, CSS3 e JavaScript puro - index.html)
+
+
+2. LINKS DE ACESSO, CÓDIGO-FONTE E EXECUÇÃO
+--------------------------------------------------------------------------------
+• Repositório Oficial do Projeto no GitHub:
+  https://github.com/felipesaliba5-design/EA2-RAG-Webhooks
+
+• Base de Conhecimento Documental RAG (Catálogo JSON com 20 Documentos Oficiais):
+  https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/blob/main/json%20Agente%20de%20IA
+  (Versão Raw Direta):
+  https://raw.githubusercontent.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/main/json%20Agente%20de%20IA
+
+• Workflow Final do n8n para Importação (workflow_edubot.json):
+  https://github.com/felipesaliba5-design/EA2-RAG-Webhooks/blob/main/workflow_edubot.json
+
+• Aplicação Consumidora Web (index.html):
+  https://github.com/felipesaliba5-design/EA2-RAG-Webhooks/blob/main/index.html
+
+• Script DDL de Configuração do Banco Vetorial Supabase (supabase_setup.sql):
+  https://github.com/felipesaliba5-design/EA2-RAG-Webhooks/blob/main/supabase_setup.sql
+
+
+3. VISÃO GERAL, EVOLUÇÃO E AJUSTES REALIZADOS
+--------------------------------------------------------------------------------
+1. COMPORTAMENTO E DIRETRIZES DO AGENTE (PERSONA EDUBOT):
+   - Triagem Obrigatória: Se o aluno faz pergunta sobre prazos mas não especifica o curso (React ou Node.js), o EduBot pergunta o curso antes de qualquer busca.
+   - Bloqueio de Dúvidas de Código e Avaliações: NUNCA responde código ou dá dicas para avaliações do curso; orienta o aluno a agendar mentoria 1:1 pelo portal.
+   - Bloqueio de Prorrogação de Prazos: Aplicação estrita e empática da política de não prorrogação para assegurar a isonomia.
+   - Escalonamento Exclusivo para TI: Acionamento exclusivo para bugs da plataforma (Erro 500, tela branca), com coleta de e-mail.
+
+2. BASE DE CONHECIMENTO DINÂMICA (RAG COM SUPABASE PGVECTOR):
+   - Correção na descrição da Tool no n8n: declara expressamente a base oficial da DevAcademy.
+   - 20 documentos oficiais ingeridos com chunking de 1000 caracteres e embeddings OpenAI.
+
+3. COMUNICAÇÃO HTTP POR WEBHOOK (BACKEND DESACOPLADO):
+   - Payload de entrada: { "message": "...", "session_id": "..." }
+   - Suporte universal a CORS (Access-Control-Allow-Origin: *).
+   - Sessões gerenciadas via session_id.
+
+
+4. CASOS DE USO VALIDADOS
+--------------------------------------------------------------------------------
+• Caso 1: Consulta de Prazos (Bootcamp React) -> Retorna 05/12/2026 às 23:59 via RAG imediato.
+• Caso 2: Pergunta Incompleta -> Pergunta qual o curso antes de buscar.
+• Caso 3: Dúvida de Código de Avaliação -> Recusa responder e indica mentoria individual.
+• Caso 4: Solicitação de Extensão de Prazo -> Nega conforme a política de prazos.
+• Caso 5: Bug de Sistema / Erro 500 -> Coleta e-mail e encaminha para suporte de TI.
+• Caso 6: Memória Conversacional -> Mantém o contexto pelo session_id.
+
+
+5. INSTRUÇÕES PARA EXECUÇÃO
+--------------------------------------------------------------------------------
+1. No n8n: Importe o arquivo 'workflow_edubot.json'.
+2. Conecte as credenciais (OpenAI, Supabase, GitHub).
+3. Ative o workflow (Active = ON).
+4. Abra o arquivo 'index.html' no navegador com duplo-clique.
+5. Converse normalmente com o EduBot!
+
+================================================================================
+FIM DO DOCUMENTO DE ENTREGA
+================================================================================
