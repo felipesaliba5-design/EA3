@@ -182,6 +182,9 @@ O arquivo executável 'workflow_edubot.json' é composto por 17 nós interconect
 • Aplicação Consumidora Web Completa (index.html):
   https://github.com/felipesaliba5-design/EA3/blob/main/index.html
 
+• Aplicação Web Executável em Produção (Vercel):
+  https://ea3-edubot.vercel.app (Acesso direto sem download)
+
 • Script DDL do Banco Vetorial Supabase (supabase_setup.sql):
   https://github.com/felipesaliba5-design/EA3/blob/main/supabase_setup.sql
 
