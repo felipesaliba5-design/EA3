@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MentorIA — Assistente Virtual de Programação</title>
+  <title>EduBot — Assistente Virtual | DevAcademy</title>
   
   <!-- Tipografia Convidativa e Acessível (Nunito + Poppins) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
 
   <style>
     /* ==========================================================================
-       Variáveis e Tema Acolhedor (MentorIA)
+       Variáveis e Tema Acolhedor (EduBot)
        ========================================================================== */
     :root {
       --bg-page: #ffffff;
@@ -127,7 +127,7 @@
       position: relative;
     }
 
-    /* Faixa Superior (Pill Banner - Estilo 1:1 MentorIA) */
+    /* Faixa Superior (Pill Banner - EduBot) */
     .chat-pill-header {
       margin: 14px 16px 8px 16px;
       background-color: var(--header-pill-bg);
@@ -524,11 +524,11 @@
 <body>
 
   <!-- ==========================================================================
-       Topo: Logotipo Centralizado com Novo Mascote Wall-E MentorIA
+       Topo: Logotipo Centralizado com Mascote Wall-E EduBot
        ========================================================================== -->
   <header class="branding-header">
     <!-- SVG do Mascote Robô Wall-E Carismático -->
-    <svg class="mascot-logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mascote MentorIA">
+    <svg class="mascot-logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mascote EduBot">
       <defs>
         <!-- Gradiente do Corpo Amarelo Wall-E -->
         <linearGradient id="walleYellowHdr" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -586,9 +586,9 @@
         <path d="M66 62 L78 50 M72 72 L86 58 M80 82 L94 68 M88 92 L102 78" stroke="#0f172a" stroke-width="3.2" />
       </g>
 
-      <!-- Placa MENTOR•IA -->
+      <!-- Placa EDUBOT no Peitoral -->
       <rect x="36" y="86" width="48" height="13" rx="2.5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1" />
-      <text x="60" y="96" font-family="'Poppins', sans-serif" font-size="7.5" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="0.06em">MENTOR•IA</text>
+      <text x="60" y="96" font-family="'Poppins', sans-serif" font-size="8" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="0.08em">EDUBOT</text>
 
       <!-- Parafusos -->
       <circle cx="30" cy="60" r="1.2" fill="#78350f" />
@@ -644,8 +644,8 @@
     </svg>
 
     <div class="brand-title-wrap">
-      <div class="brand-title">Mentor<span class="highlight">IA</span></div>
-      <div class="brand-subtitle">Assistente Virtual • Programação & Algoritmos</div>
+      <div class="brand-title">Edu<span class="highlight">Bot</span></div>
+      <div class="brand-subtitle">Assistente Virtual • DevAcademy</div>
     </div>
   </header>
 
@@ -654,9 +654,9 @@
        ========================================================================== -->
   <main class="chat-card">
 
-    <!-- Faixa Superior Estilo Pill (Assistente Virtual - Limpo e Fiel ao MentorIA) -->
+    <!-- Faixa Superior Estilo Pill (Assistente Virtual EduBot) -->
     <div class="chat-pill-header">
-      Assistente Virtual - Programação
+      Assistente Virtual - DevAcademy
     </div>
 
     <!-- Gaveta Retrátil de Configurações (Fica Oculta por Padrão) -->
@@ -680,9 +680,9 @@
     <!-- Área de Mensagens -->
     <div class="chat-messages" id="messagesContainer">
       
-      <!-- Mensagem Inicial de Boas-Vindas MentorIA -->
+      <!-- Mensagem Inicial de Boas-Vindas EduBot -->
       <div class="msg-row-bot">
-        <div class="bot-avatar-circle" title="MentorIA">
+        <div class="bot-avatar-circle" title="EduBot">
           <svg viewBox="18 8 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="avYellowInit" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -732,15 +732,15 @@
         </div>
         
         <div class="bot-bubble">
-          <p>Olá! 👋 Eu sou o <strong>MentorIA</strong> e estou aqui para ajudar você a <strong>compreender problemas de programação e construir suas próprias soluções algorítmicas</strong> passo a passo. Posso auxiliar com pseudocódigo, Portugol e diferentes linguagens de programação.</p>
-          <p style="margin-top: 6px;">Envie um problema, exercício ou código que esteja desenvolvendo e vamos construir a solução juntos.</p>
-          <p style="margin-top: 6px; font-weight: 700;">Antes de começarmos, como posso chamar você?</p>
+          <p>Olá! 👋 Eu sou o <strong>EduBot</strong>, seu assistente virtual oficial da <strong>DevAcademy</strong>!</p>
+          <p style="margin-top: 6px;">Estou aqui para ajudar você a compreender cronogramas, prazos oficiais dos Bootcamps (Front-End React e Back-End Node.js), regras de projetos e dúvidas da plataforma.</p>
+          <p style="margin-top: 6px; font-weight: 700;">Como posso ajudar você hoje?</p>
         </div>
       </div>
 
       <!-- Indicador de Digitação -->
       <div class="typing-indicator" id="typingIndicator">
-        <div class="bot-avatar-circle" title="MentorIA">
+        <div class="bot-avatar-circle" title="EduBot">
           <svg viewBox="18 8 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="28" y="54" width="64" height="38" rx="6" fill="#eab308" />
             <path d="M42 22 L78 22" stroke="#334155" stroke-width="3.5" stroke-linecap="round" />
@@ -794,13 +794,13 @@
        Lógica JavaScript e Conexão Webhook n8n
        ========================================================================== -->
   <script>
-    // Gerenciamento de Sessão Persistente MentorIA
-    let sessionId = localStorage.getItem('mentoria_session_id') || localStorage.getItem('edubot_session_id') || 'sessao_' + Math.random().toString(36).substring(2, 9);
-    localStorage.setItem('mentoria_session_id', sessionId);
+    // Gerenciamento de Sessão Persistente EduBot
+    let sessionId = localStorage.getItem('edubot_session_id') || 'sessao_' + Math.random().toString(36).substring(2, 9);
+    localStorage.setItem('edubot_session_id', sessionId);
 
     // Recuperação de URL do Webhook
     const webhookInput = document.getElementById('webhookUrl');
-    const savedUrl = localStorage.getItem('mentoria_webhook_url') || localStorage.getItem('edubot_webhook_url');
+    const savedUrl = localStorage.getItem('edubot_webhook_url');
     if (savedUrl) {
       webhookInput.value = savedUrl;
     } else {
@@ -825,7 +825,7 @@
     // Controle de Presets de Webhook
     window.setWebhook = function(url) {
       webhookInput.value = url;
-      localStorage.setItem('mentoria_webhook_url', url);
+      localStorage.setItem('edubot_webhook_url', url);
       updatePresetButtons(url);
     };
 
@@ -854,14 +854,14 @@
 
     webhookInput.addEventListener('change', () => {
       const val = webhookInput.value.trim();
-      localStorage.setItem('mentoria_webhook_url', val);
+      localStorage.setItem('edubot_webhook_url', val);
       updatePresetButtons(val);
     });
 
     // Reiniciar Sessão
     btnNewSession.addEventListener('click', () => {
       sessionId = 'sessao_' + Math.random().toString(36).substring(2, 9);
-      localStorage.setItem('mentoria_session_id', sessionId);
+      localStorage.setItem('edubot_session_id', sessionId);
       updateSessionLabel();
 
       const banner = document.createElement('div');
@@ -943,7 +943,7 @@
       const formattedHtml = formatBotText(text);
 
       row.innerHTML = `
-        <div class="bot-avatar-circle" title="MentorIA">
+        <div class="bot-avatar-circle" title="EduBot">
           <svg viewBox="18 8 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="28" y="54" width="64" height="38" rx="6" fill="#eab308" stroke="#ca8a04" stroke-width="1.5" />
             <rect x="34" y="58" width="52" height="16" rx="2" fill="#1e293b" />
