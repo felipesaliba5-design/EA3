@@ -1,6 +1,6 @@
 """
 Script de teste de comunicação HTTP com o Webhook do n8n
-Agente: EduBot EA3 (EA2 - RAG e Webhooks) / DevAcademy
+Agente: MentorIA — Assistente Virtual de Programação
 """
 
 import sys
@@ -39,7 +39,7 @@ def send_message(message: str, session_id: str = None, webhook_url: str = DEFAUL
         print(f"[*] Status HTTP: {response.status_code}")
         
         if response.status_code == 200:
-            print("[+] Resposta do EduBot:")
+            print("[+] Resposta do MentorIA:")
             data = response.json()
             if isinstance(data, dict) and "output" in data:
                 print(f"\n{data['output']}\n")
@@ -56,20 +56,14 @@ if __name__ == "__main__":
     session = f"aluno_teste_{uuid.uuid4().hex[:6]}"
     
     print("=" * 60)
-    print(f"TESTE DE INTEGRAÇÃO EDUBOT -> WEBHOOK N8N")
+    print(f"TESTE DE INTEGRAÇÃO MENTORIA -> WEBHOOK N8N")
     print(f"URL Alvo: {target_url}")
     print("=" * 60)
     
-    print("\n--- CASO 1: Consulta de Prazo Específico (Bootcamp Front-End React) ---")
+    print("\n--- TESTE: Dúvida de Programação / Algoritmos ---")
     send_message(
-        message="Qual é a data limite para a entrega do projeto final do Bootcamp Front-End React?",
+        message="Olá! Como posso implementar uma busca binária em Portugol ou pseudocódigo?",
         session_id=session,
         webhook_url=target_url
     )
-    
-    print("\n--- CASO 2: Pergunta Genérica sem Curso Especificado (Triagem) ---")
-    send_message(
-        message="Qual é o prazo de entrega do projeto?",
-        session_id=session,
-        webhook_url=target_url
-    )
+

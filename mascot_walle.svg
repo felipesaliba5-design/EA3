@@ -1,0 +1,149 @@
+<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mascote MentorIA">
+  <defs>
+    <!-- Gradiente do Corpo Amarelo Wall-E -->
+    <linearGradient id="walleYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="40%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+
+    <!-- Gradiente Metal Cinza Escuro -->
+    <linearGradient id="walleDarkMetal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+
+    <!-- Gradiente Metal Claro/Prateado -->
+    <linearGradient id="walleSilver" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1f5f9" />
+      <stop offset="50%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+
+    <!-- Gradiente Lente Óptica Azulada -->
+    <radialGradient id="lensGlow" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="60%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#082f49" />
+    </radialGradient>
+
+    <clipPath id="stripeClip">
+      <rect x="70" y="58" width="18" height="20" rx="2" />
+    </clipPath>
+  </defs>
+
+  <!-- Sombra no Chão -->
+  <ellipse cx="60" cy="112" rx="46" ry="5" fill="#000000" fill-opacity="0.12" />
+
+  <!-- ================= ESTEIRAS (TRACKS) ================= -->
+  <!-- Esteira Esquerda (Triangular com Relevo) -->
+  <path d="M10 108 L28 108 L34 76 L22 72 L8 100 Z" fill="url(#walleDarkMetal)" />
+  <!-- Dentes da Esteira Esquerda -->
+  <path d="M8 104 L28 104 M8 98 L24 98 M12 90 L26 90 M18 80 L30 80" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Rodas Dentadas / Spindles Esquerda -->
+  <circle cx="16" cy="102" r="4.5" fill="url(#walleSilver)" stroke="#1e293b" stroke-width="1.2" />
+  <circle cx="24" cy="102" r="4.5" fill="url(#walleSilver)" stroke="#1e293b" stroke-width="1.2" />
+  <circle cx="25" cy="80" r="3.5" fill="url(#walleSilver)" stroke="#1e293b" stroke-width="1.2" />
+
+  <!-- Esteira Direita (Simétrica com Perspectiva) -->
+  <path d="M92 108 L110 108 L112 100 L98 72 L86 76 Z" fill="url(#walleDarkMetal)" />
+  <!-- Dentes da Esteira Direita -->
+  <path d="M92 104 L112 104 M96 98 L112 98 M94 90 L108 90 M90 80 L102 80" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Rodas Dentadas Direita -->
+  <circle cx="96" cy="102" r="4.5" fill="url(#walleSilver)" stroke="#1e293b" stroke-width="1.2" />
+  <circle cx="104" cy="102" r="4.5" fill="url(#walleSilver)" stroke="#1e293b" stroke-width="1.2" />
+  <circle cx="95" cy="80" r="3.5" fill="url(#walleSilver)" stroke="#1e293b" stroke-width="1.2" />
+
+  <!-- ================= CORPO PRINCIPAL (CHASSIS) ================= -->
+  <!-- Base do Corpo Amarelo Wall-E -->
+  <rect x="26" y="56" width="68" height="48" rx="6" fill="url(#walleYellow)" stroke="#a16207" stroke-width="1.5" />
+
+  <!-- Topo Chanfrado / Tampa Superior -->
+  <path d="M28 56 L34 50 L86 50 L92 56 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="1" />
+
+  <!-- Painel Frontal Superior Cinza Escuro -->
+  <rect x="32" y="58" width="56" height="20" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1" />
+
+  <!-- Medidor de Carga Solar (LEDs Verdes) -->
+  <rect x="36" y="63" width="12" height="2.5" rx="1" fill="#22c55e" />
+  <rect x="36" y="67" width="9" height="2.5" rx="1" fill="#22c55e" />
+  <rect x="36" y="71" width="14" height="2.5" rx="1" fill="#22c55e" />
+
+  <!-- Botão Vermelho de Gravação/Status -->
+  <circle cx="54" cy="68" r="3.2" fill="#ef4444" stroke="#b91c1c" stroke-width="0.8" />
+
+  <!-- Faixas de Advertência Diagonal (Hazard Stripes) no Canto Direito -->
+  <g clip-path="url(#stripeClip)">
+    <rect x="70" y="58" width="18" height="20" fill="#eab308" />
+    <path d="M66 62 L78 50 M72 72 L86 58 M80 82 L94 68 M88 92 L102 78" stroke="#0f172a" stroke-width="3.2" />
+  </g>
+
+  <!-- Placa com Nome MentorIA no Peitoral -->
+  <rect x="36" y="86" width="48" height="13" rx="2.5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1" />
+  <text x="60" y="96" font-family="'Poppins', sans-serif" font-size="7.5" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="0.06em">MENTOR•IA</text>
+
+  <!-- Parafusos / Rebites nos Cantos -->
+  <circle cx="30" cy="60" r="1.2" fill="#78350f" />
+  <circle cx="90" cy="60" r="1.2" fill="#78350f" />
+  <circle cx="30" cy="100" r="1.2" fill="#78350f" />
+  <circle cx="90" cy="100" r="1.2" fill="#78350f" />
+
+  <!-- ================= BRAÇOS MECÂNICOS ================= -->
+  <!-- Braço Direito (Em Repouso na Lateral) -->
+  <path d="M88 68 L98 76 L94 88" stroke="#eab308" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="88" cy="68" r="3" fill="url(#walleSilver)" />
+  <!-- Garra Direita (Clamp Fechada) -->
+  <path d="M92 88 L98 94 M96 88 L102 94" stroke="url(#walleSilver)" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Braço Esquerdo (Acenando Feliz!) -->
+  <path d="M32 68 L16 54 L12 40" stroke="#eab308" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="32" cy="68" r="3" fill="url(#walleSilver)" />
+  <circle cx="16" cy="54" r="2.5" fill="url(#walleSilver)" />
+  <!-- Garra Esquerda Aberta Acenando -->
+  <path d="M12 40 L6 32 M12 38 L16 30 M10 40 L4 42" stroke="url(#walleSilver)" stroke-width="3" stroke-linecap="round" />
+
+  <!-- ================= PESCOÇO ARTICULADO ================= -->
+  <rect x="57" y="36" width="6" height="16" rx="2" fill="url(#walleDarkMetal)" stroke="#64748b" stroke-width="0.8" />
+  <!-- Pistão Hidráulico do Pescoço -->
+  <rect x="54" y="42" width="3" height="10" fill="url(#walleSilver)" />
+  <circle cx="60" cy="36" r="4" fill="url(#walleSilver)" />
+
+  <!-- ================= CABEÇA / OLHOS BINOCULARES WALL-E ================= -->
+  <!-- Barra de Conexão Superior dos Binóculos -->
+  <path d="M42 22 L78 22" stroke="#334155" stroke-width="3.5" stroke-linecap="round" />
+
+  <!-- OLHO ESQUERDO (Inclinado com Curiosidade - Expressão Cativante) -->
+  <g transform="rotate(-6 44 26)">
+    <!-- Carcaça do Binóculo Esquerdo -->
+    <path d="M26 13 C32 9, 56 9, 60 13 C62 25, 60 38, 54 42 C46 44, 28 42, 24 36 C22 26, 22 17, 26 13 Z" fill="url(#walleSilver)" stroke="#334155" stroke-width="1.8" />
+    <!-- Borda Interna / Anel Óptico -->
+    <circle cx="42" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+    <!-- Vidro / Lente Azul Curiosa -->
+    <circle cx="42" cy="26" r="9" fill="url(#lensGlow)" />
+    <circle cx="42" cy="26" r="4.5" fill="#0284c7" />
+    <circle cx="42" cy="26" r="2.2" fill="#0f172a" />
+    <!-- Brilhos Especulares / Reflexo Amigável -->
+    <circle cx="39" cy="23" r="2.2" fill="#ffffff" />
+    <circle cx="45" cy="28" r="1" fill="#ffffff" opacity="0.8" />
+    <path d="M36 29 A 6 6 0 0 0 46 31" stroke="#38bdf8" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.6" />
+  </g>
+
+  <!-- OLHO DIREITO (Inclinado de Forma Expressiva) -->
+  <g transform="rotate(6 76 26)">
+    <!-- Carcaça do Binóculo Direito -->
+    <path d="M60 13 C64 9, 88 9, 94 13 C98 17, 98 26, 96 36 C92 42, 74 44, 66 42 C60 38, 58 25, 60 13 Z" fill="url(#walleSilver)" stroke="#334155" stroke-width="1.8" />
+    <!-- Borda Interna / Anel Óptico -->
+    <circle cx="78" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+    <!-- Vidro / Lente Azul Curiosa -->
+    <circle cx="78" cy="26" r="9" fill="url(#lensGlow)" />
+    <circle cx="78" cy="26" r="4.5" fill="#0284c7" />
+    <circle cx="78" cy="26" r="2.2" fill="#0f172a" />
+    <!-- Brilhos Especulares / Reflexo Amigável -->
+    <circle cx="75" cy="23" r="2.2" fill="#ffffff" />
+    <circle cx="81" cy="28" r="1" fill="#ffffff" opacity="0.8" />
+    <path d="M72 29 A 6 6 0 0 0 82 31" stroke="#38bdf8" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.6" />
+  </g>
+
+  <!-- Sobrancelha Metálica Central Expressiva -->
+  <path d="M48 15 Q60 18 72 15" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round" fill="none" />
+</svg>

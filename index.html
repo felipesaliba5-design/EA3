@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduBot — Assistente Virtual | DevAcademy</title>
+  <title>MentorIA — Assistente Virtual de Programação</title>
   
   <!-- Tipografia Convidativa e Acessível (Nunito + Poppins) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       Variáveis e Tema Acolhedor (Inspirado em MentorIA / DevAcademy)
+       Variáveis e Tema Acolhedor (MentorIA)
        ========================================================================== */
     :root {
       --bg-page: #ffffff;
@@ -524,50 +524,128 @@
 <body>
 
   <!-- ==========================================================================
-       Logotipo Centralizado com Mascote Corujinha Educacional
+       Topo: Logotipo Centralizado com Novo Mascote Wall-E MentorIA
        ========================================================================== -->
   <header class="branding-header">
-    <!-- SVG do Mascote Corujinha com Capelo Acadêmico -->
-    <svg class="mascot-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mascote MentorIA / EduBot">
-      <!-- Corpo da Corujinha -->
-      <ellipse cx="50" cy="58" rx="36" ry="32" fill="#2d8a57" />
-      <ellipse cx="50" cy="62" rx="28" ry="24" fill="#38a169" />
-      <ellipse cx="50" cy="64" rx="20" ry="18" fill="#5cd9a6" />
-      
-      <!-- Detalhes de Penas na Barriguinha -->
-      <path d="M44 60 Q50 63 56 60" stroke="#256b44" stroke-width="2" stroke-linecap="round" fill="none" />
-      <path d="M42 66 Q50 69 58 66" stroke="#256b44" stroke-width="2" stroke-linecap="round" fill="none" />
-      <path d="M45 72 Q50 74 55 72" stroke="#256b44" stroke-width="2" stroke-linecap="round" fill="none" />
+    <!-- SVG do Mascote Robô Wall-E Carismático -->
+    <svg class="mascot-logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mascote MentorIA">
+      <defs>
+        <!-- Gradiente do Corpo Amarelo Wall-E -->
+        <linearGradient id="walleYellowHdr" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fde047" />
+          <stop offset="40%" stop-color="#eab308" />
+          <stop offset="100%" stop-color="#ca8a04" />
+        </linearGradient>
+        <linearGradient id="walleDarkMetalHdr" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#475569" />
+          <stop offset="100%" stop-color="#1e293b" />
+        </linearGradient>
+        <linearGradient id="walleSilverHdr" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f1f5f9" />
+          <stop offset="50%" stop-color="#94a3b8" />
+          <stop offset="100%" stop-color="#64748b" />
+        </linearGradient>
+        <radialGradient id="lensGlowHdr" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#38bdf8" />
+          <stop offset="60%" stop-color="#0284c7" />
+          <stop offset="100%" stop-color="#082f49" />
+        </radialGradient>
+        <clipPath id="stripeClipHdr">
+          <rect x="70" y="58" width="18" height="20" rx="2" />
+        </clipPath>
+      </defs>
 
-      <!-- Olhinhos Grandes e Expressivos com Óculos -->
-      <!-- Armação dos Óculos -->
-      <circle cx="36" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-      <circle cx="64" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-      <path d="M49 48 L51 48" stroke="#1b4d31" stroke-width="3" stroke-linecap="round" />
+      <!-- Sombra no Chão -->
+      <ellipse cx="60" cy="112" rx="46" ry="5" fill="#000000" fill-opacity="0.12" />
 
-      <!-- Pupilas -->
-      <circle cx="38" cy="48" r="7" fill="#1b4d31" />
-      <circle cx="62" cy="48" r="7" fill="#1b4d31" />
-      <!-- Brilho dos Olhos -->
-      <circle cx="36" cy="45" r="2.5" fill="#ffffff" />
-      <circle cx="60" cy="45" r="2.5" fill="#ffffff" />
+      <!-- Esteiras Esquerda e Direita -->
+      <path d="M10 108 L28 108 L34 76 L22 72 L8 100 Z" fill="url(#walleDarkMetalHdr)" />
+      <path d="M8 104 L28 104 M8 98 L24 98 M12 90 L26 90 M18 80 L30 80" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" />
+      <circle cx="16" cy="102" r="4.5" fill="url(#walleSilverHdr)" stroke="#1e293b" stroke-width="1.2" />
+      <circle cx="24" cy="102" r="4.5" fill="url(#walleSilverHdr)" stroke="#1e293b" stroke-width="1.2" />
+      <circle cx="25" cy="80" r="3.5" fill="url(#walleSilverHdr)" stroke="#1e293b" stroke-width="1.2" />
 
-      <!-- Bico Amarelo Alaranjado -->
-      <polygon points="50,53 46,59 54,59" fill="#f59e0b" stroke="#d97706" stroke-width="1.2" stroke-linejoin="round" />
+      <path d="M92 108 L110 108 L112 100 L98 72 L86 76 Z" fill="url(#walleDarkMetalHdr)" />
+      <path d="M92 104 L112 104 M96 98 L112 98 M94 90 L108 90 M90 80 L102 80" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round" />
+      <circle cx="96" cy="102" r="4.5" fill="url(#walleSilverHdr)" stroke="#1e293b" stroke-width="1.2" />
+      <circle cx="104" cy="102" r="4.5" fill="url(#walleSilverHdr)" stroke="#1e293b" stroke-width="1.2" />
+      <circle cx="95" cy="80" r="3.5" fill="url(#walleSilverHdr)" stroke="#1e293b" stroke-width="1.2" />
 
-      <!-- Capelo Acadêmico (Mortarboard) -->
-      <polygon points="50,15 15,28 50,38 85,28" fill="#1e3a2f" />
-      <polygon points="50,17 22,28 50,36 78,28" fill="#2d5744" />
-      <path d="M30 32 L30 40 C30 44 70 44 70 40 L70 32" fill="#1e3a2f" />
-      <!-- Pompom e Fita do Capelo -->
-      <circle cx="50" cy="26" r="3" fill="#f59e0b" />
-      <path d="M50 26 Q74 29 76 42" stroke="#f59e0b" stroke-width="2" fill="none" stroke-linecap="round" />
-      <polygon points="73,42 79,42 76,48" fill="#f59e0b" />
+      <!-- Corpo Principal Amarelo Wall-E -->
+      <rect x="26" y="56" width="68" height="48" rx="6" fill="url(#walleYellowHdr)" stroke="#a16207" stroke-width="1.5" />
+      <path d="M28 56 L34 50 L86 50 L92 56 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="1" />
+      <rect x="32" y="58" width="56" height="20" rx="3" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <rect x="36" y="63" width="12" height="2.5" rx="1" fill="#22c55e" />
+      <rect x="36" y="67" width="9" height="2.5" rx="1" fill="#22c55e" />
+      <rect x="36" y="71" width="14" height="2.5" rx="1" fill="#22c55e" />
+      <circle cx="54" cy="68" r="3.2" fill="#ef4444" stroke="#b91c1c" stroke-width="0.8" />
+
+      <!-- Faixas de Advertência Diagonais -->
+      <g clip-path="url(#stripeClipHdr)">
+        <rect x="70" y="58" width="18" height="20" fill="#eab308" />
+        <path d="M66 62 L78 50 M72 72 L86 58 M80 82 L94 68 M88 92 L102 78" stroke="#0f172a" stroke-width="3.2" />
+      </g>
+
+      <!-- Placa MENTOR•IA -->
+      <rect x="36" y="86" width="48" height="13" rx="2.5" fill="#fef9c3" stroke="#ca8a04" stroke-width="1" />
+      <text x="60" y="96" font-family="'Poppins', sans-serif" font-size="7.5" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="0.06em">MENTOR•IA</text>
+
+      <!-- Parafusos -->
+      <circle cx="30" cy="60" r="1.2" fill="#78350f" />
+      <circle cx="90" cy="60" r="1.2" fill="#78350f" />
+      <circle cx="30" cy="100" r="1.2" fill="#78350f" />
+      <circle cx="90" cy="100" r="1.2" fill="#78350f" />
+
+      <!-- Braço Direito em Repouso -->
+      <path d="M88 68 L98 76 L94 88" stroke="#eab308" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="88" cy="68" r="3" fill="url(#walleSilverHdr)" />
+      <path d="M92 88 L98 94 M96 88 L102 94" stroke="url(#walleSilverHdr)" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Braço Esquerdo Acenando Feliz! -->
+      <path d="M32 68 L16 54 L12 40" stroke="#eab308" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="32" cy="68" r="3" fill="url(#walleSilverHdr)" />
+      <circle cx="16" cy="54" r="2.5" fill="url(#walleSilverHdr)" />
+      <path d="M12 40 L6 32 M12 38 L16 30 M10 40 L4 42" stroke="url(#walleSilverHdr)" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Pescoço Articulado -->
+      <rect x="57" y="36" width="6" height="16" rx="2" fill="url(#walleDarkMetalHdr)" stroke="#64748b" stroke-width="0.8" />
+      <rect x="54" y="42" width="3" height="10" fill="url(#walleSilverHdr)" />
+      <circle cx="60" cy="36" r="4" fill="url(#walleSilverHdr)" />
+
+      <!-- Barra de Conexão Superior dos Binóculos -->
+      <path d="M42 22 L78 22" stroke="#334155" stroke-width="3.5" stroke-linecap="round" />
+
+      <!-- Olho Esquerdo Inclinado Curioso -->
+      <g transform="rotate(-6 44 26)">
+        <path d="M26 13 C32 9, 56 9, 60 13 C62 25, 60 38, 54 42 C46 44, 28 42, 24 36 C22 26, 22 17, 26 13 Z" fill="url(#walleSilverHdr)" stroke="#334155" stroke-width="1.8" />
+        <circle cx="42" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+        <circle cx="42" cy="26" r="9" fill="url(#lensGlowHdr)" />
+        <circle cx="42" cy="26" r="4.5" fill="#0284c7" />
+        <circle cx="42" cy="26" r="2.2" fill="#0f172a" />
+        <circle cx="39" cy="23" r="2.2" fill="#ffffff" />
+        <circle cx="45" cy="28" r="1" fill="#ffffff" opacity="0.8" />
+        <path d="M36 29 A 6 6 0 0 0 46 31" stroke="#38bdf8" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.6" />
+      </g>
+
+      <!-- Olho Direito Inclinado Expressivo -->
+      <g transform="rotate(6 76 26)">
+        <path d="M60 13 C64 9, 88 9, 94 13 C98 17, 98 26, 96 36 C92 42, 74 44, 66 42 C60 38, 58 25, 60 13 Z" fill="url(#walleSilverHdr)" stroke="#334155" stroke-width="1.8" />
+        <circle cx="78" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+        <circle cx="78" cy="26" r="9" fill="url(#lensGlowHdr)" />
+        <circle cx="78" cy="26" r="4.5" fill="#0284c7" />
+        <circle cx="78" cy="26" r="2.2" fill="#0f172a" />
+        <circle cx="75" cy="23" r="2.2" fill="#ffffff" />
+        <circle cx="81" cy="28" r="1" fill="#ffffff" opacity="0.8" />
+        <path d="M72 29 A 6 6 0 0 0 82 31" stroke="#38bdf8" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.6" />
+      </g>
+
+      <!-- Sobrancelha Metálica Superior -->
+      <path d="M48 15 Q60 18 72 15" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round" fill="none" />
     </svg>
 
     <div class="brand-title-wrap">
       <div class="brand-title">Mentor<span class="highlight">IA</span></div>
-      <div class="brand-subtitle">EduBot • DevAcademy</div>
+      <div class="brand-subtitle">Assistente Virtual • Programação & Algoritmos</div>
     </div>
   </header>
 
@@ -602,37 +680,74 @@
     <!-- Área de Mensagens -->
     <div class="chat-messages" id="messagesContainer">
       
-      <!-- Mensagem Inicial de Boas-Vindas Idêntica ao Layout MentorIA -->
+      <!-- Mensagem Inicial de Boas-Vindas MentorIA -->
       <div class="msg-row-bot">
-        <div class="bot-avatar-circle" title="EduBot">
-          <svg viewBox="0 0 100 100" fill="none">
-            <ellipse cx="50" cy="58" rx="36" ry="32" fill="#2d8a57" />
-            <circle cx="36" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-            <circle cx="64" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-            <circle cx="38" cy="48" r="7" fill="#1b4d31" />
-            <circle cx="62" cy="48" r="7" fill="#1b4d31" />
-            <polygon points="50,53 46,59 54,59" fill="#f59e0b" />
-            <polygon points="50,15 15,28 50,38 85,28" fill="#1e3a2f" />
+        <div class="bot-avatar-circle" title="MentorIA">
+          <svg viewBox="18 8 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="avYellowInit" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fde047" />
+                <stop offset="40%" stop-color="#eab308" />
+                <stop offset="100%" stop-color="#ca8a04" />
+              </linearGradient>
+              <linearGradient id="avSilverInit" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f1f5f9" />
+                <stop offset="50%" stop-color="#94a3b8" />
+                <stop offset="100%" stop-color="#64748b" />
+              </linearGradient>
+              <radialGradient id="avLensGlowInit" cx="40%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#38bdf8" />
+                <stop offset="60%" stop-color="#0284c7" />
+                <stop offset="100%" stop-color="#082f49" />
+              </radialGradient>
+            </defs>
+            <rect x="28" y="54" width="64" height="38" rx="6" fill="url(#avYellowInit)" stroke="#a16207" stroke-width="1.5" />
+            <rect x="34" y="58" width="52" height="16" rx="2" fill="#1e293b" />
+            <rect x="38" y="63" width="10" height="2.5" rx="1" fill="#22c55e" />
+            <rect x="38" y="67" width="14" height="2.5" rx="1" fill="#22c55e" />
+            <circle cx="56" cy="66" r="3" fill="#ef4444" />
+            <rect x="57" y="36" width="6" height="18" rx="2" fill="#334155" />
+            <circle cx="60" cy="36" r="3.5" fill="url(#avSilverInit)" />
+            <path d="M42 22 L78 22" stroke="#334155" stroke-width="3.5" stroke-linecap="round" />
+            <g transform="rotate(-6 44 26)">
+              <path d="M26 13 C32 9, 56 9, 60 13 C62 25, 60 38, 54 42 C46 44, 28 42, 24 36 C22 26, 22 17, 26 13 Z" fill="url(#avSilverInit)" stroke="#334155" stroke-width="1.8" />
+              <circle cx="42" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+              <circle cx="42" cy="26" r="9" fill="url(#avLensGlowInit)" />
+              <circle cx="42" cy="26" r="4.5" fill="#0284c7" />
+              <circle cx="42" cy="26" r="2.2" fill="#0f172a" />
+              <circle cx="39" cy="23" r="2.2" fill="#ffffff" />
+              <circle cx="45" cy="28" r="1" fill="#ffffff" opacity="0.8" />
+            </g>
+            <g transform="rotate(6 76 26)">
+              <path d="M60 13 C64 9, 88 9, 94 13 C98 17, 98 26, 96 36 C92 42, 74 44, 66 42 C60 38, 58 25, 60 13 Z" fill="url(#avSilverInit)" stroke="#334155" stroke-width="1.8" />
+              <circle cx="78" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+              <circle cx="78" cy="26" r="9" fill="url(#avLensGlowInit)" />
+              <circle cx="78" cy="26" r="4.5" fill="#0284c7" />
+              <circle cx="78" cy="26" r="2.2" fill="#0f172a" />
+              <circle cx="75" cy="23" r="2.2" fill="#ffffff" />
+              <circle cx="81" cy="28" r="1" fill="#ffffff" opacity="0.8" />
+            </g>
+            <path d="M48 15 Q60 18 72 15" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round" fill="none" />
           </svg>
         </div>
         
         <div class="bot-bubble">
-          <p>Olá! 👋 Eu sou o <strong>EduBot (MentorIA)</strong> e estou aqui para ajudar você a <strong>compreender prazos, cronogramas oficiais e orientações acadêmicas</strong> dos Bootcamps DevAcademy (Front-End React e Back-End Node.js), além de dúvidas gerais de programação.</p>
-          <p style="margin-top: 6px;">Envie sua dúvida, exercício ou questão operacional e vamos construir a resposta juntos.</p>
-          <p style="margin-top: 6px; font-weight: 700;">Antes de começarmos, como posso ajudar você hoje?</p>
+          <p>Olá! 👋 Eu sou o <strong>MentorIA</strong> e estou aqui para ajudar você a <strong>compreender problemas de programação e construir suas próprias soluções algorítmicas</strong> passo a passo. Posso auxiliar com pseudocódigo, Portugol e diferentes linguagens de programação.</p>
+          <p style="margin-top: 6px;">Envie um problema, exercício ou código que esteja desenvolvendo e vamos construir a solução juntos.</p>
+          <p style="margin-top: 6px; font-weight: 700;">Antes de começarmos, como posso chamar você?</p>
         </div>
       </div>
 
       <!-- Indicador de Digitação -->
       <div class="typing-indicator" id="typingIndicator">
-        <div class="bot-avatar-circle">
-          <svg viewBox="0 0 100 100" fill="none">
-            <ellipse cx="50" cy="58" rx="36" ry="32" fill="#2d8a57" />
-            <circle cx="36" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-            <circle cx="64" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-            <circle cx="38" cy="48" r="7" fill="#1b4d31" />
-            <circle cx="62" cy="48" r="7" fill="#1b4d31" />
-            <polygon points="50,53 46,59 54,59" fill="#f59e0b" />
+        <div class="bot-avatar-circle" title="MentorIA">
+          <svg viewBox="18 8 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="28" y="54" width="64" height="38" rx="6" fill="#eab308" />
+            <path d="M42 22 L78 22" stroke="#334155" stroke-width="3.5" stroke-linecap="round" />
+            <circle cx="42" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+            <circle cx="42" cy="26" r="4.5" fill="#38bdf8" />
+            <circle cx="78" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+            <circle cx="78" cy="26" r="4.5" fill="#38bdf8" />
           </svg>
         </div>
         <div class="typing-bubble">
@@ -679,13 +794,13 @@
        Lógica JavaScript e Conexão Webhook n8n
        ========================================================================== -->
   <script>
-    // Gerenciamento de Sessão Persistente
-    let sessionId = localStorage.getItem('edubot_session_id') || 'sessao_' + Math.random().toString(36).substring(2, 9);
-    localStorage.setItem('edubot_session_id', sessionId);
+    // Gerenciamento de Sessão Persistente MentorIA
+    let sessionId = localStorage.getItem('mentoria_session_id') || localStorage.getItem('edubot_session_id') || 'sessao_' + Math.random().toString(36).substring(2, 9);
+    localStorage.setItem('mentoria_session_id', sessionId);
 
     // Recuperação de URL do Webhook
     const webhookInput = document.getElementById('webhookUrl');
-    const savedUrl = localStorage.getItem('edubot_webhook_url');
+    const savedUrl = localStorage.getItem('mentoria_webhook_url') || localStorage.getItem('edubot_webhook_url');
     if (savedUrl) {
       webhookInput.value = savedUrl;
     } else {
@@ -710,7 +825,7 @@
     // Controle de Presets de Webhook
     window.setWebhook = function(url) {
       webhookInput.value = url;
-      localStorage.setItem('edubot_webhook_url', url);
+      localStorage.setItem('mentoria_webhook_url', url);
       updatePresetButtons(url);
     };
 
@@ -739,14 +854,14 @@
 
     webhookInput.addEventListener('change', () => {
       const val = webhookInput.value.trim();
-      localStorage.setItem('edubot_webhook_url', val);
+      localStorage.setItem('mentoria_webhook_url', val);
       updatePresetButtons(val);
     });
 
     // Reiniciar Sessão
     btnNewSession.addEventListener('click', () => {
       sessionId = 'sessao_' + Math.random().toString(36).substring(2, 9);
-      localStorage.setItem('edubot_session_id', sessionId);
+      localStorage.setItem('mentoria_session_id', sessionId);
       updateSessionLabel();
 
       const banner = document.createElement('div');
@@ -828,15 +943,33 @@
       const formattedHtml = formatBotText(text);
 
       row.innerHTML = `
-        <div class="bot-avatar-circle" title="EduBot">
-          <svg viewBox="0 0 100 100" fill="none">
-            <ellipse cx="50" cy="58" rx="36" ry="32" fill="#2d8a57" />
-            <circle cx="36" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-            <circle cx="64" cy="48" r="14" fill="#ffffff" stroke="#1b4d31" stroke-width="3" />
-            <circle cx="38" cy="48" r="7" fill="#1b4d31" />
-            <circle cx="62" cy="48" r="7" fill="#1b4d31" />
-            <polygon points="50,53 46,59 54,59" fill="#f59e0b" />
-            <polygon points="50,15 15,28 50,38 85,28" fill="#1e3a2f" />
+        <div class="bot-avatar-circle" title="MentorIA">
+          <svg viewBox="18 8 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="28" y="54" width="64" height="38" rx="6" fill="#eab308" stroke="#ca8a04" stroke-width="1.5" />
+            <rect x="34" y="58" width="52" height="16" rx="2" fill="#1e293b" />
+            <rect x="38" y="63" width="10" height="2.5" rx="1" fill="#22c55e" />
+            <rect x="38" y="67" width="14" height="2.5" rx="1" fill="#22c55e" />
+            <circle cx="56" cy="66" r="3" fill="#ef4444" />
+            <rect x="57" y="36" width="6" height="18" rx="2" fill="#334155" />
+            <circle cx="60" cy="36" r="3.5" fill="#94a3b8" />
+            <path d="M42 22 L78 22" stroke="#334155" stroke-width="3.5" stroke-linecap="round" />
+            <g transform="rotate(-6 44 26)">
+              <path d="M26 13 C32 9, 56 9, 60 13 C62 25, 60 38, 54 42 C46 44, 28 42, 24 36 C22 26, 22 17, 26 13 Z" fill="#cbd5e1" stroke="#334155" stroke-width="1.8" />
+              <circle cx="42" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+              <circle cx="42" cy="26" r="9" fill="#0284c7" />
+              <circle cx="42" cy="26" r="4.5" fill="#38bdf8" />
+              <circle cx="42" cy="26" r="2.2" fill="#0f172a" />
+              <circle cx="39" cy="23" r="2.2" fill="#ffffff" />
+            </g>
+            <g transform="rotate(6 76 26)">
+              <path d="M60 13 C64 9, 88 9, 94 13 C98 17, 98 26, 96 36 C92 42, 74 44, 66 42 C60 38, 58 25, 60 13 Z" fill="#cbd5e1" stroke="#334155" stroke-width="1.8" />
+              <circle cx="78" cy="26" r="11.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+              <circle cx="78" cy="26" r="9" fill="#0284c7" />
+              <circle cx="78" cy="26" r="4.5" fill="#38bdf8" />
+              <circle cx="78" cy="26" r="2.2" fill="#0f172a" />
+              <circle cx="75" cy="23" r="2.2" fill="#ffffff" />
+            </g>
+            <path d="M48 15 Q60 18 72 15" stroke="#1e293b" stroke-width="2.2" stroke-linecap="round" fill="none" />
           </svg>
         </div>
         <div class="bot-bubble">${formattedHtml}</div>

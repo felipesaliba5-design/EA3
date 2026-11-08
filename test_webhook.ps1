@@ -1,11 +1,11 @@
-﻿# Teste de comunicação HTTP com o Webhook do n8n via PowerShell
+﻿# Teste de comunicação HTTP com o Webhook do MentorIA via PowerShell
 param(
     [string]$WebhookUrl = "https://n8n.incluc0de.com.br/webhook/chat"
 )
 
 $Body = @{
-    message    = "Qual é a data limite para a entrega do projeto final do Bootcamp Front-End React?"
-    session_id = "sessao-powershell-$(Get-Random)"
+    message    = "Olá! Como posso implementar uma busca linear e busca binária passo a passo?"
+    session_id = "sessao-mentoria-$(Get-Random)"
 } | ConvertTo-Json -Compress
 
 $Headers = @{
