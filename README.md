@@ -13,24 +13,27 @@ Solução integrada de Agente de IA consolidando e evoluindo as etapas anteriore
 - **Brasília - DF | 08/11/2026**
 - **Plataforma Educacional (Cenário):** DevAcademy (Bootcamps Front-End React e Back-End Node.js)
 - **Repositório Oficial EA3:** [https://github.com/felipesaliba5-design/EA3](https://github.com/felipesaliba5-design/EA3)
+- **Aplicação Web Online (Vercel):** [https://edubot-phi.vercel.app](https://edubot-phi.vercel.app)
 
 ---
 
 ## 🔗 Links Oficiais de Entrega e Acesso
 
-1. **Repositório do Projeto no GitHub (EA3):**  
+1. **Aplicação Web em Produção (Vercel - Acesso Direto sem Download):**  
+   👉 [https://edubot-phi.vercel.app](https://edubot-phi.vercel.app)
+2. **Repositório do Projeto no GitHub (EA3):**  
    [https://github.com/felipesaliba5-design/EA3](https://github.com/felipesaliba5-design/EA3)
-2. **Aplicação Consumidora Web (Chat Interativo):**  
+3. **Aplicação Consumidora Web (Código-fonte index.html):**  
    [`index.html`](https://github.com/felipesaliba5-design/EA3/blob/main/index.html)
-3. **Workflow Executável do n8n (.json):**  
+4. **Workflow Executável do n8n (.json):**  
    [`workflow_edubot.json`](https://github.com/felipesaliba5-design/EA3/blob/main/workflow_edubot.json)
-4. **Documento Oficial de Entrega (.txt):**  
+5. **Documento Oficial de Entrega (.txt):**  
    [`ENTREGA_EA3_PROJETO_FINAL_COMPLETO.txt`](https://github.com/felipesaliba5-design/EA3/blob/main/ENTREGA_EA3_PROJETO_FINAL_COMPLETO.txt)
-5. **Script DDL Supabase Vector Store:**  
+6. **Script DDL Supabase Vector Store:**  
    [`supabase_setup.sql`](https://github.com/felipesaliba5-design/EA3/blob/main/supabase_setup.sql)
-6. **Base Documental de 20 PDFs (Catálogo JSON):**  
+7. **Base Documental de 20 PDFs (Catálogo JSON):**  
    [`json Agente de IA no GitHub`](https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/blob/main/json%20Agente%20de%20IA)
-7. **Endpoint de Produção do Webhook (Cloud):**  
+8. **Endpoint de Produção do Webhook (Cloud):**  
    `https://n8n.incluc0de.com.br/webhook/chat`
 
 ---

@@ -41,6 +41,7 @@ Documento de Identificação e Especificação Técnica Consolidada para a Entre
 • Plataforma de Desenvolvimento e Orquestração: n8n Workflow Automation (v1+ Cloud & Local)
 • Etapa: EA3 — Projeto Final Completo (Consolidação e Evolução das Etapas EA1 e EA2)
 • Repositório Oficial no GitHub: https://github.com/felipesaliba5-design/EA3
+• Aplicação Web em Produção (Vercel): https://edubot-phi.vercel.app
 • E-mail de Contato: felipesaliba5@gmail.com
 
 
@@ -182,8 +183,8 @@ O arquivo executável 'workflow_edubot.json' é composto por 17 nós interconect
 • Aplicação Consumidora Web Completa (index.html):
   https://github.com/felipesaliba5-design/EA3/blob/main/index.html
 
-• Aplicação Web Executável em Produção (Vercel):
-  https://ea3-edubot.vercel.app (Acesso direto sem download)
+• Aplicação Web Executável em Produção (Vercel - Acesso Direto Online):
+  https://edubot-phi.vercel.app
 
 • Script DDL do Banco Vetorial Supabase (supabase_setup.sql):
   https://github.com/felipesaliba5-design/EA3/blob/main/supabase_setup.sql
