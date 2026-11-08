@@ -1,20 +1,25 @@
 """
 Script de teste de comunicação HTTP com o Webhook do n8n
-Agente: EduBot EA3 (EA2 - RAG e Webhooks)
+Agente: EduBot EA3 (EA2 - RAG e Webhooks) / DevAcademy
 """
 
-import requests
-import json
+import sys
 import uuid
+import json
 
-# Substitua pela URL da sua instância do n8n:
-# Para webhook de produção: http://localhost:5678/webhook/chat
-# Para webhook de teste no editor n8n: http://localhost:5678/webhook-test/chat
-WEBHOOK_URL = "http://localhost:5678/webhook/chat"
+# URL oficial do n8n Cloud ou Local
+DEFAULT_WEBHOOK_URL = "https://n8n.incluc0de.com.br/webhook/chat"
+LOCAL_WEBHOOK_URL = "http://localhost:5678/webhook/chat"
 
-def send_message(message: str, session_id: str = None):
+def send_message(message: str, session_id: str = None, webhook_url: str = DEFAULT_WEBHOOK_URL):
+    try:
+        import requests
+    except ImportError:
+        print("[!] Biblioteca 'requests' não encontrada. Instale com: pip install requests")
+        return
+
     if session_id is None:
-        session_id = str(uuid.uuid4())
+        session_id = f"sessao_teste_{uuid.uuid4().hex[:8]}"
     
     payload = {
         "message": message,
@@ -22,37 +27,49 @@ def send_message(message: str, session_id: str = None):
     }
     
     headers = {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Accept": "application/json"
     }
     
-    print(f"[*] Enviando requisição para: {WEBHOOK_URL}")
-    print(f"[*] Payload de entrada: {json.dumps(payload, ensure_ascii=False, indent=2)}")
+    print(f"\n[*] Endpoint: {webhook_url}")
+    print(f"[*] Payload ({session_id}): {message}")
     
     try:
-        response = requests.post(WEBHOOK_URL, json=payload, headers=headers, timeout=60)
+        response = requests.post(webhook_url, json=payload, headers=headers, timeout=60)
         print(f"[*] Status HTTP: {response.status_code}")
         
         if response.status_code == 200:
-            print("[+] Resposta do Agente:")
-            print(json.dumps(response.json(), ensure_ascii=False, indent=2))
+            print("[+] Resposta do EduBot:")
+            data = response.json()
+            if isinstance(data, dict) and "output" in data:
+                print(f"\n{data['output']}\n")
+            else:
+                print(json.dumps(data, ensure_ascii=False, indent=2))
         else:
-            print(f"[-] Erro retornado: {response.text}")
+            print(f"[-] Erro retornado ({response.status_code}): {response.text}")
             
-    except requests.exceptions.RequestException as e:
-        print(f"[-] Falha na requisição HTTP: {e}")
+    except Exception as e:
+        print(f"[-] Falha na requisição: {e}")
 
 if __name__ == "__main__":
-    test_session = "aluno_demo_101"
+    target_url = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_WEBHOOK_URL
+    session = f"aluno_teste_{uuid.uuid4().hex[:6]}"
     
-    print("=== TESTE 1: Pergunta sobre conteúdo dos artigos da base RAG ===")
+    print("=" * 60)
+    print(f"TESTE DE INTEGRAÇÃO EDUBOT -> WEBHOOK N8N")
+    print(f"URL Alvo: {target_url}")
+    print("=" * 60)
+    
+    print("\n--- CASO 1: Consulta de Prazo Específico (Bootcamp Front-End React) ---")
     send_message(
-        message="Olá! O que os artigos da base de conhecimento explicam sobre Agentes de IA?",
-        session_id=test_session
+        message="Qual é a data limite para a entrega do projeto final do Bootcamp Front-End React?",
+        session_id=session,
+        webhook_url=target_url
     )
     
-    print("\n=== TESTE 2: Pergunta operacional (DevAcademy) ===")
+    print("\n--- CASO 2: Pergunta Genérica sem Curso Especificado (Triagem) ---")
     send_message(
-        message="Qual o prazo para envio do projeto final do bootcamp?",
-        session_id=test_session
+        message="Qual é o prazo de entrega do projeto?",
+        session_id=session,
+        webhook_url=target_url
     )
-
