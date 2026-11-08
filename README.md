@@ -1,124 +1,97 @@
-# EA2 — Projeto de RAG e Webhooks (EduBot EA3)
+# EA3 — Projeto Final Completo: Solução Integrada de Agente de IA com RAG, Webhooks e Aplicação Consumidora
 
-Evolução do Agente de Inteligência Artificial da etapa EA1 para a etapa EA2, incorporando uma base de conhecimento dinâmica utilizando **RAG (Retrieval-Augmented Generation)** com **Supabase pgvector** e disponibilizando o agente como um serviço de backend acessível por **HTTP via Webhook do n8n**.
-
----
-
-## 📌 Identificação do Projeto
-
-- **Nome do Projeto:** Evolução do Agente de IA com RAG e Webhooks
-- **Nome do Agente:** EduBot EA3
-- **Autor / Aluno:** Felipe Saliba ([@felipesaliba5-design](https://github.com/felipesaliba5-design))
-- **Repositório GitHub do Projeto:** [`EA2-RAG-Webhooks`](https://github.com/felipesaliba5-design/EA2-RAG-Webhooks)
-- **Repositório da Base Documental (Artigos):** [`Constru-o-da-Base-Documental-do-Agente-de-IA`](https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA)
-- **Tecnologias:** n8n, OpenAI (`gpt-4o-mini`, `text-embedding-3-small`), Supabase (`pgvector`), GitHub API, LangChain (n8n Nodes).
+Solução integrada de Agente de IA consolidando e evoluindo as etapas anteriores (**EA1** e **EA2**). O **EduBot** atua como assistente virtual da **DevAcademy**, combinando raciocínio via LLM, recuperação semântica sobre 20 documentos oficiais com **RAG (Supabase pgvector)**, comunicação desacoplada via **Webhook HTTP** no **n8n** e uma **Aplicação Web Interativa (index.html)** com o mascote WALL-E.
 
 ---
 
-## 🔗 Links de Acesso e Implementação
+## 📌 Identificação Acadêmica
 
-1. **Repositório do Projeto no GitHub:**  
-   [https://github.com/felipesaliba5-design/EA2-RAG-Webhooks](https://github.com/felipesaliba5-design/EA2-RAG-Webhooks)
-2. **Base Documental (JSON de Artigos e Links de PDFs):**  
-   [json Agente de IA no GitHub](https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/blob/main/json%20Agente%20de%20IA)  
-   [Versão Raw](https://raw.githubusercontent.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/main/json%20Agente%20de%20IA)
-3. **Workflow Executável do n8n (JSON):**  
-   [`workflow_edubot_rag_webhook.json`](https://github.com/felipesaliba5-design/EA2-RAG-Webhooks/blob/main/workflow_edubot_rag_webhook.json)
+- **Atividade:** EA3 — Projeto Final Completo
+- **Aluno / Autor:** Felipe Vieira Saliba Rebouças ([@felipesaliba5-design](https://github.com/felipesaliba5-design))
+- **Professor Orientador:** Leandro Vaguetti
+- **Disciplina:** Desenvolvimento de Agentes de IA
+- **Brasília - DF | 08/11/2026**
+- **Plataforma Educacional (Cenário):** DevAcademy (Bootcamps Front-End React e Back-End Node.js)
+- **Repositório Oficial EA3:** [https://github.com/felipesaliba5-design/EA3](https://github.com/felipesaliba5-design/EA3)
+
+---
+
+## 🔗 Links Oficiais de Entrega e Acesso
+
+1. **Repositório do Projeto no GitHub (EA3):**  
+   [https://github.com/felipesaliba5-design/EA3](https://github.com/felipesaliba5-design/EA3)
+2. **Aplicação Consumidora Web (Chat Interativo):**  
+   [`index.html`](https://github.com/felipesaliba5-design/EA3/blob/main/index.html)
+3. **Workflow Executável do n8n (.json):**  
+   [`workflow_edubot.json`](https://github.com/felipesaliba5-design/EA3/blob/main/workflow_edubot.json)
 4. **Documento Oficial de Entrega (.txt):**  
-   [`ENTREGA_EA2_PROJETO_RAG_E_WEBHOOKS.txt`](https://github.com/felipesaliba5-design/EA2-RAG-Webhooks/blob/main/ENTREGA_EA2_PROJETO_RAG_E_WEBHOOKS.txt)
+   [`ENTREGA_EA3_PROJETO_FINAL_COMPLETO.txt`](https://github.com/felipesaliba5-design/EA3/blob/main/ENTREGA_EA3_PROJETO_FINAL_COMPLETO.txt)
+5. **Script DDL Supabase Vector Store:**  
+   [`supabase_setup.sql`](https://github.com/felipesaliba5-design/EA3/blob/main/supabase_setup.sql)
+6. **Base Documental de 20 PDFs (Catálogo JSON):**  
+   [`json Agente de IA no GitHub`](https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/blob/main/json%20Agente%20de%20IA)
+7. **Endpoint de Produção do Webhook (Cloud):**  
+   `https://n8n.incluc0de.com.br/webhook/chat`
 
 ---
 
-## 🏗️ Arquitetura do Sistema
-
-O sistema é dividido em dois pipelines independentes e complementares dentro do n8n:
+## 🏗️ Arquitetura da Solução
 
 ```mermaid
 flowchart TD
-    subgraph FLUXO_A["Pipeline de Ingestão e Vetorização (RAG)"]
-        A1["Manual Trigger<br>('Execute workflow')"] --> A2["GitHub Node<br>(Busca JSON de Artigos)"]
-        A2 --> A3["Code Node<br>(Converte Base64 -> JSON)"]
-        A3 --> A4["HTTP Request<br>(Download PDFs)"]
-        A4 --> A5["Extract from File<br>(Extração de Texto do PDF)"]
-        A5 --> A6["Code Node<br>(Chunking 1000c / 150 overlap + Metadados)"]
-        A6 --> A7["Supabase Vector Store<br>(Mode: Insert / documents)"]
-        A8["OpenAI Embeddings Upsert"] -.-> A7
-        A9["Default Data Loader"] -.-> A7
+    subgraph CLIENTE["1. Aplicação Consumidora Web (index.html)"]
+        UI["Interface Web EduBot<br>(Mascote WALL-E + Drawer Webhook)"] -->|POST JSON<br>message + session_id| WH
     end
 
-    subgraph FLUXO_B["Pipeline de Atendimento HTTP (Webhook)"]
-        B1["Webhook Node<br>(POST /chat)"] --> B2["Edit Fields<br>(chatInput & sessionId)"]
-        B2 --> B3["AI Agent<br>(LangChain Agent v2)"]
-        B4["OpenAI Chat Model<br>(gpt-4o-mini)"] -.-> B3
-        B5["Simple Memory<br>(Window = 10, key: sessionId)"] -.-> B3
-        B6["Supabase Vector Store1<br>(Tool: Consulta Artigos IA)"] -.-> B3
-        B7["OpenAI Embeddings"] -.-> B6
-        B3 --> B8["Respond to Webhook<br>(JSON Response)"]
+    subgraph N8N_ROTA["2. Microsserviço HTTP no n8n"]
+        WH["Webhook POST /chat<br>(CORS Enabled: *)"] --> EF["Edit Fields<br>(Normaliza chaves)"]
+        EF --> AGENT["AI Agent v2<br>(LangChain + gpt-4o-mini)"]
+        AGENT --> RESP["Respond to Webhook<br>(HTTP 200 + output JSON)"]
+        RESP -->|Resposta JSON| UI
+        MEM["Buffer Window Memory<br>(Indexada por session_id)"] <--> AGENT
     end
-```
 
----
+    subgraph RAG_SUPABASE["3. Base Vetorial e RAG (Supabase)"]
+        AGENT <-->|"Tool: Base_de_Conhecimento<br>(RPC match_documents)"| VSTORE["Supabase pgvector<br>(Tabela 'documents' + HNSW)"]
+        EMBED["OpenAI Embeddings<br>(text-embedding-3-small)"] -.-> VSTORE
+    end
 
-## 📡 Especificação da API HTTP (Webhook)
-
-### Rota e Método
-- **Método:** `POST`
-- **Caminho de Produção:** `https://<instancia-n8n>/webhook/chat`
-- **Caminho de Teste:** `https://<instancia-n8n>/webhook-test/chat`
-- **Header:** `Content-Type: application/json`
-
-### Payload de Entrada (Request)
-```json
-{
-  "message": "Qual é a definição de agentes autônomos apresentada nos artigos?",
-  "session_id": "usuario_aluno_123"
-}
-```
-
-### Payload de Saída (Response)
-```json
-{
-  "output": "De acordo com os artigos da base de conhecimento, agentes autônomos são entidades de software baseadas em IA capazes de perceber seu ambiente, tomar decisões deliberativas e executar ações direcionadas a metas..."
-}
-```
-
-### Exemplo de Chamada (cURL)
-```bash
-curl -X POST "http://localhost:5678/webhook/chat" \
-     -H "Content-Type: application/json" \
-     -d '{"message": "O que os artigos abordam sobre agentes de IA?", "session_id": "teste-01"}'
-```
-
----
-
-## 🗄️ Estrutura do Banco de Dados Vetorial (Supabase pgvector)
-
-Consulte o arquivo [`supabase_setup.sql`](./supabase_setup.sql) para o script completo de criação da tabela `documents`, índice HNSW e função RPC `match_documents`.
-
-```sql
-CREATE EXTENSION IF NOT EXISTS vector;
-
-CREATE TABLE IF NOT EXISTS documents (
-    id BIGSERIAL PRIMARY KEY,
-    content TEXT NOT NULL,
-    metadata JSONB,
-    embedding VECTOR(1536)
-);
-
-CREATE INDEX IF NOT EXISTS documents_embedding_hnsw_idx 
-ON documents USING hnsw (embedding vector_cosine_ops);
+    subgraph INGESTAO["4. Pipeline de Ingestão de Documentos"]
+        TRIGGER["Trigger Manual"] --> GH["GitHub Node<br>(Baixa JSON com 20 PDFs)"]
+        GH --> CODE["Conversor JSON"] --> HTTP["Download dos PDFs"]
+        HTTP --> EXTRACT["Extração de Texto (PDF)"]
+        EXTRACT --> CHUNK["Chunking (70 blocos)"]
+        CHUNK --> VSTORE
+    end
 ```
 
 ---
 
 ## 🚀 Como Executar
 
-1. **Configurar o Banco de Dados:** Execute o script `supabase_setup.sql` no SQL Editor do Supabase.
-2. **Importar o Workflow no n8n:** Importe o arquivo `workflow_edubot_rag_webhook.json` no n8n.
-3. **Vincular Credenciais:**
-   - Conta GitHub (leitura de repositórios).
-   - Conta OpenAI (acesso ao gpt-4o-mini e embeddings).
-   - Conta Supabase (URL e Service Role / API Key).
-4. **Executar Ingestão RAG:** Clique em *Execute workflow* no gatilho manual para baixar os PDFs, fatiar e indexar no Supabase.
-5. **Ativar o Webhook:** Ligue o interruptor **Active** do workflow no n8n.
-6. **Testar Comunicação Externa:** Execute `python test_webhook.py` ou `.\test_webhook.ps1`.
+### 1. Interface Web do Chat
+Dê duplo-clique no arquivo [`index.html`](index.html) para abrir no navegador.  
+O chat já está apontando para o endpoint na nuvem: `https://n8n.incluc0de.com.br/webhook/chat`.
+
+### 2. Importação no n8n
+1. No seu n8n, clique em **Workflows** -> **Import from File**.
+2. Selecione o arquivo [`workflow_edubot.json`](workflow_edubot.json).
+3. Conecte as credenciais (OpenAI, Supabase, GitHub).
+4. Alterne o status para **Active (ON)**.
+
+### 3. Testes Automatizados via Terminal
+- **Python:** `python test_webhook.py`
+- **PowerShell:** `.\test_webhook.ps1`
+
+---
+
+## 🧪 Casos de Uso Validados
+
+| Caso | Entrada do Aluno | Comportamento do EduBot |
+| :--- | :--- | :--- |
+| **1. Prazo Oficial** | *"Qual a data limite de entrega do Bootcamp React?"* | Consulta RAG e responde: **05/12/2026 às 23:59**. |
+| **2. Pergunta Incompleta** | *"Qual o prazo de entrega do projeto?"* | Triagem pedagógica: pergunta se é Front-End ou Back-End. |
+| **3. Dúvida de Código** | *"Corrige esse bug de sintaxe no meu código?"* | Bloqueio didático: recusa e indica mentoria individual 1:1. |
+| **4. Pedido de Prorrogação** | *"Pode adiar meu prazo por 3 dias?"* | Nega com empatia, mantendo a isonomia institucional. |
+| **5. Bug de Sistema** | *"Erro 500 ao enviar o arquivo na plataforma."* | Coleta e-mail e encaminha chamado exclusivo para TI. |
+| **6. Memória Conversacional** | Perguntas sequenciais contextuais | Mantém o histórico sem repetição via `session_id`. |

@@ -1,0 +1,204 @@
+EA3 — PROJETO FINAL COMPLETO FELIPE VIEIRA SALIBA REBOUÇAS Disciplina: Desenvolvimento de Agentes de IA Professor: Leandro Vaguetti Brasília - DF 08/11/2026
+--------------------------------------------------------------------------------
+SUMÁRIO
+--------------------------------------------------------------------------------
+1. IDENTIFICAÇÃO DO PROJETO E DO GRUPO
+2. VISÃO GERAL, OBJETIVO E EVOLUÇÃO INTEGRADA (EA1 -> EA2 -> EA3)
+3. BASE DE CONHECIMENTO E ARQUITETURA RAG CONSOLIDADA
+   3.1 DOCUMENTOS SELECIONADOS E ESTRUTURAÇÃO DO CONHECIMENTO
+   3.2 PIPELINE DE INGESTÃO E RECUPERAÇÃO SEMÂNTICA (SUPABASE PGVECTOR)
+   3.3 DIRETRIZES DE USO DO RAG, GUARDRAILS E PERSONA EDUBOT
+4. COMUNICAÇÃO HTTP E MICROSSERVIÇO VIA WEBHOOK NO N8N
+   4.1 ESPECIFICAÇÃO DA ROTA E SUPORTE A CORS (ENDPOINT HTTP)
+   4.2 ESTRUTURA DO PAYLOAD DE ENTRADA (REQUEST PAYLOAD)
+   4.3 ESTRUTURA DAS RESPOSTAS (RESPONSE PAYLOAD)
+   4.4 GERENCIAMENTO DE SESSÕES E MEMÓRIA CONVERSACIONAL (BUFFER MEMORY)
+5. APLICAÇÃO CONSUMIDORA WEB INTERATIVA (INDEX.HTML)
+   5.1 ARQUITETURA, IDENTIDADE VISUAL E DESIGN SYSTEM
+   5.2 MASCOTE EDUBOT (WALL-E) E EXPERIÊNCIA DO ALUNO
+   5.3 PAINEL DE CONTROLE DE ENDPOINT, TELEMETRIA E PRESETS
+6. CASOS DE USO VALIDADOS E TESTES DE PRODUÇÃO
+   6.1 CASO 1: CONSULTA DE PRAZOS OFICIAIS (BOOTCAMP REACT)
+   6.2 CASO 2: TRIAGEM PEDAGÓGICA (PERGUNTA INCOMPLETA)
+   6.3 CASO 3: BLOQUEIO DIDÁTICO DE CÓDIGO DE AVALIAÇÃO E ENCAMINHAMENTO PARA MENTORIA
+   6.4 CASO 4: INFLEXIBILIDADE DE PRAZOS E ISONOMIA INSTITUCIONAL
+   6.5 CASO 5: ESCALONAMENTO DE BUGS DE PLATAFORMA (ERRO 500) PARA TI
+   6.6 CASO 6: MANUTENÇÃO DE CONTEXTO E MEMÓRIA ENTRE REQUISIÇÕES
+7. ESTRUTURA COMPLETA DO WORKFLOW NO N8N (VERSÃO CONSOLIDADA EA3)
+8. LINKS DO PROJETO, WORKFLOWS, APLICAÇÃO CONSUMIDORA E CÓDIGOS NO GITHUB
+--------------------------------------------------------------------------------
+
+EA3: PROJETO FINAL COMPLETO - EDUBOT
+Documento de Identificação e Especificação Técnica Consolidada para a Entrega da Etapa EA3.
+
+1. IDENTIFICAÇÃO DO PROJETO E DO GRUPO
+• Nome do Agente: EduBot (Solução Consolidada)
+• Domínio de Atuação: Assistente Virtual de Atendimento e Suporte Operacional Escolar
+• Plataforma de Cursos (Fictícia): DevAcademy
+• Autor / Responsável: Felipe Vieira Saliba Rebouças
+• Disciplina: Desenvolvimento de Agentes de IA
+• Professor Orientador: Leandro Vaguetti
+• Plataforma de Desenvolvimento e Orquestração: n8n Workflow Automation (v1+ Cloud & Local)
+• Etapa: EA3 — Projeto Final Completo (Consolidação e Evolução das Etapas EA1 e EA2)
+• Repositório Oficial no GitHub: https://github.com/felipesaliba5-design/EA3
+• E-mail de Contato: felipesaliba5@gmail.com
+
+
+2. VISÃO GERAL, OBJETIVO E EVOLUÇÃO INTEGRADA (EA1 -> EA2 -> EA3)
+• Objetivo Principal: Consolidar e evoluir as entregas anteriores em uma solução de software completa, desacoplada e funcional de ponta a ponta. O EduBot opera como um agente autônomo orquestrado no n8n, munido de base de conhecimento com RAG (Supabase pgvector indexando 20 documentos oficiais), exposto via Webhook HTTP com suporte a CORS e consumido em tempo real por uma aplicação web rica (index.html).
+
+• Matriz de Evolução Histórica:
+  - Na versão EA1: O agente operava de forma rudimentar, restrito à interface interna de testes do n8n (Chat Trigger), dependendo unicamente das instruções estáticas configuradas no System Message, sem base de conhecimento externa e sem integração HTTP.
+  - Na versão EA2: O agente evoluiu com a incorporação de RAG (Retrieval-Augmented Generation) conectado a banco de dados vetorial e foi exposto como microsserviço HTTP através de nós Webhook/Respond to Webhook.
+  - Na versão EA3 (Atual): A solução atinge maturidade de produção. O comportamento do agente foi refinado com guardrails rígidos de triagem e bloqueio didático; o pipeline RAG foi conectado à base oficial de 20 PDFs catalogados; o webhook passou a suportar CORS irrestrito; e foi construída uma aplicação consumidora web independente em HTML5/CSS3/JS com mascote interativo estilo WALL-E, drawer retrátil de configuração e gestão de sessões.
+
+
+3. BASE DE CONHECIMENTO E ARQUITETURA RAG CONSOLIDADA
+
+3.1 DOCUMENTOS SELECIONADOS E ESTRUTURAÇÃO DO CONHECIMENTO
+A base documental da DevAcademy foi catalogada em JSON e cobre 20 documentos oficiais dos Bootcamps de Tecnologia:
+• Regulamento Acadêmico e Manual do Aluno: critérios de avaliação, assiduidade, emissão de certificados e conduta.
+• Cronogramas Oficiais: Bootcamps Front-End (React) e Back-End (Node.js), detalhando datas limites de entrega (ex: entrega final React em 05/12/2026 às 23h59).
+• Guia de Navegação da Plataforma, FAQ Operacional e Procedimentos de Mentoria 1:1.
+• Catálogo Documental Público no GitHub:
+  https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/blob/main/json%20Agente%20de%20IA
+
+3.2 PIPELINE DE INGESTÃO E RECUPERAÇÃO SEMÂNTICA (SUPABASE PGVECTOR)
+• Pipeline de Carga: Nó 'GitHub' (ou HTTP Request) baixa o catálogo JSON bruto com os links dos 20 PDFs.
+• Conversão e Extração: Nós 'Code' e 'Extract from File' realizam o parsing de texto de cada PDF.
+• Segmentação Semântica (Chunking): O nó 'Chunk' fatia os documentos em 70 blocos de até 1.000 caracteres, preservando a coerência temática de cada parágrafo e metadados de origem.
+• Vetorização (Embeddings): Modelo text-embedding-3-small da OpenAI gerando vetores densos de 1.536 dimensões.
+• Armazenamento e Indexação: Supabase PostgreSQL com extensão pgvector ativada e índice HNSW para busca rápida por similaridade de cosseno, encapsulado pela função RPC 'match_documents'.
+
+3.3 DIRETRIZES DE USO DO RAG, GUARDRAILS E PERSONA EDUBOT
+• Fidelidade Documental Estrita (Anti-Alucinação): O EduBot responde estritamente com base nos dados recuperados pela Tool. Se um dado não constar nos documentos oficiais, ele declara de forma transparente a indisponibilidade da informação.
+• Execução Imediata: Proibição absoluta de mensagens de espera intermediárias ("vou verificar", "um momento"). A consulta e a resposta ocorrem na mesma requisição HTTP.
+• Tom de Voz: Didático, profissional, acolhedor e encorajador, respondendo em no máximo 3 parágrafos objetivos.
+
+
+4. COMUNICAÇÃO HTTP E MICROSSERVIÇO VIA WEBHOOK NO N8N
+
+4.1 ESPECIFICAÇÃO DA ROTA E SUPORTE A CORS
+• Método HTTP: POST
+• Rota de Produção: /webhook/chat (URL: https://n8n.incluc0de.com.br/webhook/chat)
+• Rota de Teste no Editor: /webhook-test/chat
+• Headers de Resposta (CORS):
+  - Access-Control-Allow-Origin: *
+  - Access-Control-Allow-Methods: POST, OPTIONS
+  - Access-Control-Allow-Headers: Content-Type, Accept
+• Resposta Imediata a Requisições OPTIONS (Preflight) garantindo que navegadores modernos executem chamadas assíncronas via fetch() sem bloqueios.
+
+4.2 ESTRUTURA DO PAYLOAD DE ENTRADA (REQUEST PAYLOAD)
+As aplicações clientes enviam uma requisição POST com corpo JSON padronizado:
+{
+  "message": "Qual é a data limite para a entrega do projeto final do Bootcamp Front-End React?",
+  "session_id": "sessao_estudante_2026"
+}
+• message (string, obrigatório): Consulta ou dúvida enviada pelo estudante.
+• session_id (string, obrigatório): Chave única de identificação da conversa para retenção de contexto.
+
+4.3 ESTRUTURA DAS RESPOSTAS (RESPONSE PAYLOAD)
+O n8n processa a entrada pelo AI Agent e retorna código HTTP 200 com a resposta formatada:
+{
+  "output": "A data limite para a entrega do projeto final do Bootcamp Front-End React é 05/12/2026 às 23:59. Certifique-se de submeter o link do seu repositório público do GitHub na aba 'Meus Projetos' antes do horário limite!"
+}
+
+4.4 GERENCIAMENTO DE SESSÕES E MEMÓRIA CONVERSACIONAL (BUFFER MEMORY)
+O nó 'Window Buffer Memory' no n8n é parametrizado com a Session Key vinculada dinamicamente ao 'session_id'. Isso permite ao agente reter o histórico recente do diálogo, interpretando pronomes, elipses e perguntas de continuação.
+
+
+5. APLICAÇÃO CONSUMIDORA WEB INTERATIVA (INDEX.HTML)
+
+5.1 ARQUITETURA, IDENTIDADE VISUAL E DESIGN SYSTEM
+A aplicação cliente é construída em arquivo único autônomo (HTML5, CSS3 moderno e Vanilla JavaScript), dispensando ferramentas complexas de build:
+• Design System Acolhedor e Acessível: Fundo limpo (#ffffff), paleta inspirada no ecossistema educacional com verde menta suave (#5cd9a6) no balão do bot, verde esmeralda (#38a169) para ações e off-white (#f1f5f9) nas mensagens do usuário.
+• Tipografia Humanizada: Nunito e Poppins para leitura agradável e fluida.
+• Layout Centralizado: Card com cantos arredondados (border-radius: 16px), sombra sutil e altura responsiva adaptada a telas desktop e dispositivos móveis.
+
+5.2 MASCOTE EDUBOT (WALL-E) E EXPERIÊNCIA DO ALUNO
+• No topo do console e nos avatares das mensagens, o EduBot é representado por uma ilustração vetorial SVG rica em detalhes do carismático robô WALL-E:
+  - Olhos binoculares ópticos expressivos e levemente inclinados com curiosidade e empatia.
+  - Chassi mecânico amarelo com a inscrição oficial 'EDUBOT' na placa peitoral.
+  - Braço esquerdo erguido com a garra mecânica aberta acenando alegremente para o estudante.
+  - Indicador de carga solar em LEDs verdes e esteiras triangulares de tração.
+
+5.3 PAINEL DE CONTROLE DE ENDPOINT, TELEMETRIA E PRESETS
+• Faixa superior 'Assistente Virtual - DevAcademy' mantida 100% limpa.
+• Barra utilitária no rodapé com botões '⚙️ Configurar Webhook' e '🔄 Nova Sessão'.
+• Gaveta retrátil de rede com Segmented Control contendo presets de um clique:
+  [Cloud Prod] -> https://n8n.incluc0de.com.br/webhook/chat
+  [Cloud Test] -> https://n8n.incluc0de.com.br/webhook-test/chat
+  [Local]      -> http://localhost:5678/webhook/chat
+• Tratamento visual de erros de conexão e indicador animado de digitação (typing indicator).
+
+
+6. CASOS DE USO VALIDADOS E TESTES DE PRODUÇÃO
+
+6.1 CASO 1: CONSULTA DE PRAZOS OFICIAIS (BOOTCAMP REACT)
+• Entrada: "Qual é a data limite para a entrega do projeto final do Bootcamp Front-End React?"
+• Execução: O EduBot ativa a ferramenta RAG, busca nos documentos do cronograma e retorna com exatidão a data 05/12/2026 às 23:59.
+
+6.2 CASO 2: TRIAGEM PEDAGÓGICA (PERGUNTA INCOMPLETA)
+• Entrada: "Qual é o prazo de entrega do projeto?"
+• Execução: Como o aluno não especificou o curso, o EduBot aciona o guardrail de triagem e indaga:
+  "Para informar o prazo correto, você está matriculado no Bootcamp Front-End (React) ou Back-End (Node.js)?"
+
+6.3 CASO 3: BLOQUEIO DIDÁTICO DE CÓDIGO DE AVALIAÇÃO E ENCAMINHAMENTO PARA MENTORIA
+• Entrada: "Pode me ajudar com o código do projeto final? Está dando erro de sintaxe."
+• Execução: O EduBot aplica a restrição rígida pedagógica, recusa fornecer código de avaliação e recomenda o agendamento de mentoria individual 1:1 pelo portal do aluno.
+
+6.4 CASO 4: INFLEXIBILIDADE DE PRAZOS E ISONOMIA INSTITUCIONAL
+• Entrada: "Preciso de mais 3 dias para entregar o trabalho, pode prorrogar meu prazo?"
+• Execução: O EduBot responde cordialmente, porém reafirma a política institucional de prazos improrrogáveis para preservar a igualdade entre todos os participantes.
+
+6.5 CASO 5: ESCALONAMENTO DE BUGS DE PLATAFORMA (ERRO 500) PARA TI
+• Entrada: "Apareceu Erro 500 na tela ao tentar submeter o arquivo do projeto."
+• Execução: O EduBot reconhece falha técnica do portal, solicita o e-mail de contato do aluno e confirma a abertura de chamado junto ao time de TI.
+
+6.6 CASO 6: MANUTENÇÃO DE CONTEXTO E MEMÓRIA ENTRE REQUISIÇÕES
+• Entrada 1: "Estou fazendo o Bootcamp Back-End Node.js."
+• Entrada 2: "Qual é o prazo final dele?"
+• Execução: Graças à memória indexada pelo session_id, o EduBot recupera o curso informado na mensagem anterior e informa o prazo correto do Bootcamp Node.js sem exigir repetição.
+
+
+7. ESTRUTURA COMPLETA DO WORKFLOW NO N8N (VERSÃO CONSOLIDADA EA3)
+O arquivo executável 'workflow_edubot.json' é composto por 17 nós interconectados organizados em dois pipelines integrados:
+1. PIPELINE DE ATENDIMENTO EM TEMPO REAL:
+   - Webhook (POST /chat) -> Edit Fields (normalização de campos) -> AI Agent (LangChain) -> Respond to Webhook.
+   - Subnós conectados ao AI Agent: OpenAI Chat Model (gpt-4o-mini), Window Buffer Memory, e Base de Conhecimento (Supabase Vector Store).
+   - Subnós conectados ao Vector Store: Embeddings OpenAI (text-embedding-3-small).
+2. PIPELINE DE INGESTÃO CONTÍNUA DE DOCUMENTOS:
+   - When clicking 'Execute workflow' -> GitHub (baixa catálogo JSON dos PDFs) -> Code (converte JSON) -> HTTP Request (baixa PDFs) -> Extract from File (leitura do texto) -> Chunk (segmentação em 70 blocos) -> Supabase Vector Store (Upsert com Embeddings).
+
+
+8. LINKS DO PROJETO, WORKFLOWS, APLICAÇÃO CONSUMIDORA E CÓDIGOS NO GITHUB
+--------------------------------------------------------------------------------
+• Repositório Oficial Consolidado (EA3):
+  https://github.com/felipesaliba5-design/EA3
+
+• Workflow Final Executável do n8n (.json):
+  https://github.com/felipesaliba5-design/EA3/blob/main/workflow_edubot.json
+
+• Aplicação Consumidora Web Completa (index.html):
+  https://github.com/felipesaliba5-design/EA3/blob/main/index.html
+
+• Script DDL do Banco Vetorial Supabase (supabase_setup.sql):
+  https://github.com/felipesaliba5-design/EA3/blob/main/supabase_setup.sql
+
+• Base Documental de 20 PDFs (Catálogo JSON):
+  https://github.com/felipesaliba5-design/Constru-o-da-Base-Documental-do-Agente-de-IA/blob/main/json%20Agente%20de%20IA
+
+• Scripts de Teste HTTP (Python e PowerShell):
+  https://github.com/felipesaliba5-design/EA3/blob/main/test_webhook.py
+  https://github.com/felipesaliba5-design/EA3/blob/main/test_webhook.ps1
+
+• Repositórios das Etapas Anteriores (Histórico de Evolução):
+  - Etapa EA2 (RAG e Webhooks): https://github.com/felipesaliba5-design/EA2-RAG-Webhooks
+  - Etapa EA1 (Agente Inicial): https://github.com/felipesaliba5-design/workflow-EduBot-EA1
+
+• Endpoint do Webhook em Nuvem (Pronto para Execução):
+  https://n8n.incluc0de.com.br/webhook/chat
+
+================================================================================
+FIM DO DOCUMENTO DE ENTREGA — EA3 PROJETO FINAL COMPLETO
+================================================================================

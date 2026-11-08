@@ -1,4 +1,4 @@
-﻿# Teste de comunicação HTTP com o Webhook do EduBot via PowerShell
+# Teste de comunicação HTTP com o Webhook do EduBot via PowerShell
 param(
     [string]$WebhookUrl = "https://n8n.incluc0de.com.br/webhook/chat"
 )
